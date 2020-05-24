@@ -25,6 +25,20 @@ class UserController extends Controller
     public function handleRegister(Request $request)
     {
         $user = new \App\User();
+
+        $validation = Validator::make($request->all(), [
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string',
+        ]);
+
+        if ($validation->fails()) {
+            return redirect('/register')
+                ->withErrors($validation)->withInput($request->except('password'));
+        }
+
+
         $user->firstname = $request->input('firstname');
         $user->lastname = $request->input('lastname');
         $user->email = $request->input('email');
@@ -36,6 +50,8 @@ class UserController extends Controller
 
     public function handleLogin(Request $request)
     {
+        $request->flash();
+
         $validation = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string',
