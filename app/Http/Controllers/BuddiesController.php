@@ -13,7 +13,8 @@ class BuddiesController extends Controller
 
     public function show($buddy){
         // $data['users'] = \App\User::find($buddy)->first();
-        $data['users'] = \App\User::where('id', $buddy)->with('interests')->first();
+        $data['buddy'] = \App\User::where('id', $buddy)->with('interests')->first();
+        $data['me'] = auth()->user()->id;
         return view('buddies/show', $data);
     }
 
