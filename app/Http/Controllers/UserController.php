@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
+use Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -38,13 +40,14 @@ class UserController extends Controller
                 ->withErrors($validation)->withInput($request->except('password'));
         }
 
-
-        $user->firstname = $request->input('firstname');
-        $user->lastname = $request->input('lastname');
         $user->email = $request->input('email');
         $user->password = \Hash::make($request->input('password'));
         $user->save();
 
+        $userId = $user->id;
+
+        $buddy = BuddiesController::handleRegister($request, $userId);
+        $this->handleLogin($request);
         return redirect('/');
     }
 
@@ -63,7 +66,11 @@ class UserController extends Controller
         }
 
         $credentials = $request->only(['email', 'password']);
-        if (\Auth::attempt($credentials)) {
+
+        if (Auth::attempt($credentials)) {
+            $user = auth()->user();
+            $data['userdetails'] = \App\Buddy::where('user_id', $user->id)->first();
+            Session::put('user', $data['userdetails']);
             return redirect('/');
         }
         return redirect('/login')->withErrors('Your email or password was incorrect!');
@@ -133,5 +140,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+
+        return redirect('/login');
     }
 }

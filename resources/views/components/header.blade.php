@@ -1,3 +1,4 @@
+@if(Auth::check() and Session::has('user'))
 <nav class="bg-gray-800">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
@@ -31,18 +32,18 @@
         </div>
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <button class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" aria-label="Notifications">
+        <a class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out cursor-pointer" href="/logout" aria-label="Logout">
 
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 17l5-5-5-5M19.8 12H9M10 3H4v18h6"/>
           </svg>
-        </button>
+        </a>
 
         <!-- Profile dropdown -->
         <div class="ml-3 relative">
           <div>
-            <a class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out cursor-pointer" id="user-menu" href="/buddies/{{ auth()->user()->id }}" aria-label="User menu" aria-haspopup="true">
-              <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+            <a class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out cursor-pointer" id="user-menu" href="/buddies/{{ Session::get('user')->id }}" aria-label="User menu" aria-haspopup="true">
+              <img class="h-8 w-8 rounded-full" src="{{ asset('storage/profile_picture/'.Session::get('user')->id.'/'.Session::get('user')->profile_picture) }}" alt="" />
             </a>
           </div>
         </div>
@@ -64,3 +65,4 @@
     </div>
   </div>
 </nav>
+@endif

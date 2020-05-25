@@ -23,9 +23,11 @@ Route::post('/register', 'UserController@handleRegister');
 Route::get('/login', 'UserController@login');
 Route::post('/login', 'UserController@handleLogin');
 
+Route::get('/logout', 'UserController@logout');
+
 
 Route::post('/buddies', 'BuddiesController@store');
 
 Route::get('/buddies', 'BuddiesController@index');
+Route::patch('/buddies/{buddy}', ['uses' => 'BuddiesController@update']);
 Route::get('/buddies/{buddy}', 'BuddiesController@show');
-Route::get('/buddies/create', 'BuddiesController@create');

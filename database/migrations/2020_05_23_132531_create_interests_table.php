@@ -16,7 +16,7 @@ class CreateInterestsTable extends Migration
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
             $table->string('interest');
-            $table->integer('user_id');
+            $table->integer('buddy_id');
             $table->timestamps();
         });
     }

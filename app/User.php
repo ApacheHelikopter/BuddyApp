@@ -16,10 +16,10 @@ class User extends Authenticatable
      * @var array
      */
 
-    public function interests(){
-        return $this->hasMany('\App\Interest');
+    public function student()
+    {
+        return $this->hasOne(Buddy::class);
     }
-
 
     protected $fillable = [
         'name', 'email', 'password',
@@ -42,4 +42,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
 }
