@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Session;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BuddiesController extends Controller
 {
@@ -35,6 +36,21 @@ class BuddiesController extends Controller
 
     public function update(Request $request){
         $userId = Session::get('user')->id;
+        $validation = Validator::make($request->all(), [
+            'firstname' => 'string|required',
+            'lastname' => 'string|required',
+            'bio' => 'string',
+            'birth_date' => 'before:'.date('Y-m-d').'|date|required',
+            'class' => 'string|required',
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validation->fails()) {
+            return redirect("/buddies/$userId")
+                ->withErrors($validation)->withInput($request->except('password'));
+        }
+
+
         $buddy = \App\Buddy::with('user')->where('id', $userId)->first();
         $buddy->firstname = $request->input('firstname');
         $buddy->lastname = $request->input('lastname');
@@ -49,7 +65,7 @@ class BuddiesController extends Controller
         $buddy->SAVE();
         Session::put('user', $buddy);
         return redirect("/buddies/$userId")
-            ->with('success', 'User details has been updated!');
+            ->with('green', 'User details has been updated!');
     }
 
     public function store(Request $request){
