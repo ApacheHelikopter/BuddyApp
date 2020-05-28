@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('/register', 'UserController@register');
 Route::post('/register', 'UserController@handleRegister');
+Route::get('/onboarding', 'InterestsController@onboarding');
 
 Route::get('/login', 'UserController@login');
 Route::post('/login', 'UserController@handleLogin');
@@ -31,6 +32,10 @@ Route::post('/buddies', 'BuddiesController@store');
 Route::get('/buddies', 'BuddiesController@index');
 Route::patch('/buddies/{buddy}', ['uses' => 'BuddiesController@update']);
 Route::get('/buddies/{buddy}', 'BuddiesController@show');
+
+Route::get('/buddies/{buddy}/interests', 'InterestsController@index');
+Route::get('/add-interest/{buddy}', 'InterestsController@addInterest');
+Route::get('/remove-interest/{buddy}', 'InterestsController@removeInterest');
 
 Route::get('/mybuddies', 'MyBuddiesController@index');
 

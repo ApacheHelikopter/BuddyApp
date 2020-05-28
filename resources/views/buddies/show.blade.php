@@ -49,9 +49,13 @@
     <h1>{{ $buddy->firstname }}</h1>
 
     <h2>Interests</h2>
+    @if($me == $buddy->user_id)
+        <a href="/buddies/{{ $buddy->id }}/interests">EDIT</a>
+    @endif
     @foreach( $buddy->interests as $interest)
         <div>{{ $interest->interest }}</div>
     @endforeach
+
 
     @if($me != $buddy->user_id)
         @if($friendStatus=='Add buddy')

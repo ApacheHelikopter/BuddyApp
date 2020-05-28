@@ -16,7 +16,8 @@ class BuddiesController extends Controller
         $auth = Session::get('user');
         if($auth){
             $userId = Session::get('user')->id;
-            $data['users'] = \App\Buddy::get();
+            $data['users'] = \App\Buddy::whereNotIn('id', [$userId])->get();
+            $data['matchingUser'] = \App\Buddy::withCount('interests')->get();
             return view('buddies/index', $data);
         } else{
             return redirect('/login');

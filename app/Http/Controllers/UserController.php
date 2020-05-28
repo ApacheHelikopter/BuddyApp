@@ -48,7 +48,7 @@ class UserController extends Controller
 
         $buddy = BuddiesController::handleRegister($request, $userId);
         $this->handleLogin($request);
-        return redirect('/');
+        return redirect('/onboarding');
     }
 
     public function handleLogin(Request $request)
