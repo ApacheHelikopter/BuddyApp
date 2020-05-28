@@ -16,7 +16,7 @@ class Buddy extends Model
     }
 
     public function interests(){
-        return $this->hasMany('\App\Interest');
+        return $this->belongsToMany('\App\Interest');
     }
 
     public function friends(){

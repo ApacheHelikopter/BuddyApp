@@ -36,7 +36,7 @@ class BuddiesController extends Controller
 
     public function show($buddy){
         $userId = Session::get('user')->id;
-        $data['buddy'] = \App\Buddy::where('id', $buddy)->with('interests')->first();
+        $data['buddy'] = \App\Buddy::where('id', $buddy)->first();
         $data['me'] = auth()->user()->id;
         $data['friendRequests'] = \App\Friendship::where('friend_id', $userId)->where('status', 'pending')->get();
 
