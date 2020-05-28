@@ -76,6 +76,7 @@ class UserController extends Controller
         return redirect('/login')->withErrors('Your email or password was incorrect!');
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

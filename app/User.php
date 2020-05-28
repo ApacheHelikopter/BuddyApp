@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
 
-    public function student()
+    public function buddy()
     {
         return $this->hasOne(Buddy::class);
     }

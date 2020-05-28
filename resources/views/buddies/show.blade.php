@@ -22,6 +22,17 @@
         @endcomponent
     @endif
 
+    @if (\Session::has('red'))
+        @component('components/alert')
+            @slot('type') red @endslot
+            <ul>
+                <li>
+                    {!! \Session::get('red') !!}
+                </li>
+            </ul>
+        @endcomponent
+    @endif
+
     @if( $errors->any() )
         @component('components/alert')
             @slot('type') red @endslot
@@ -42,26 +53,49 @@
         <div>{{ $interest->interest }}</div>
     @endforeach
 
-        @auth
-            @if($me == $buddy->user_id)
-                @component('components/editdetails')
-                    @slot('firstname')
-                        {{ $buddy->firstname }}
-                    @endslot
-                    @slot('lastname')
-                        {{ $buddy->lastname }}
-                    @endslot
-                    @slot('bio')
-                        {{ $buddy->bio }}
-                    @endslot
-                    @slot('date')
-                        {{ $buddy->birth_date }}
-                    @endslot
-                    @slot('id')
-                        {{ $buddy->id }}
-                    @endslot
-                @endcomponent
-            @endif
-        @endauth
+    @if($me != $buddy->user_id)
+        @if($friendStatus=='Add buddy')
+            <a href="/add-friend/{{ $buddy->id }}">{{ $friendStatus }}</a>
+        @elseif($friendStatus=='Buddy request sent')
+            <p>{{ $friendStatus }}</p>
+        @elseif($friendStatus=='Remove buddy')
+            <a href="/remove-friend/{{ $buddy->id }}">{{ $friendStatus }}</a>
+        @endif
+    @endif
+
+
+
+    @auth
+        @if($me == $buddy->user_id)
+            @component('components/editdetails')
+                @slot('firstname')
+                    {{ $buddy->firstname }}
+                @endslot
+                @slot('lastname')
+                    {{ $buddy->lastname }}
+                @endslot
+                @slot('bio')
+                    {{ $buddy->bio }}
+                @endslot
+                @slot('date')
+                    {{ $buddy->birth_date }}
+                @endslot
+                @slot('id')
+                    {{ $buddy->id }}
+                @endslot
+            @endcomponent
+        @endif
+    @endauth
+
+    @if($me == $buddy->user_id)
+        @foreach($friendRequests as $request)
+            @php
+                $buddy_name = \App\Buddy::getName($request->acted_user);
+            @endphp
+            <a href="/buddies/{{ $request->acted_user }}">{{ $buddy_name }}</a>
+            <a href="/accept-request/{{ $request->acted_user }}">Accept</a>
+            <a href="/ignore-request/{{ $request->acted_user }}">Ignore</a>
+        @endforeach
+    @endif
 @endsection
 

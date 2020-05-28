@@ -31,3 +31,10 @@ Route::post('/buddies', 'BuddiesController@store');
 Route::get('/buddies', 'BuddiesController@index');
 Route::patch('/buddies/{buddy}', ['uses' => 'BuddiesController@update']);
 Route::get('/buddies/{buddy}', 'BuddiesController@show');
+
+Route::get('/mybuddies', 'MyBuddiesController@index');
+
+Route::match(['get', 'post'], '/add-friend/{buddyId}', 'BuddiesController@addFriend');
+Route::match(['get', 'post'], '/remove-friend/{buddyId}', 'BuddiesController@removeFriend');
+Route::get('/accept-request/{buddyId}', 'BuddiesController@acceptBuddyRequest');
+Route::get('/ignore-request/{buddyId}', 'BuddiesController@ignoreBuddyRequest');
