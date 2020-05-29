@@ -8,7 +8,9 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Session;
 use Auth;
+use DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Builder;
 
 class BuddiesController extends Controller
 {
@@ -16,13 +18,27 @@ class BuddiesController extends Controller
         $auth = Session::get('user');
         if($auth){
             $userId = Session::get('user')->id;
+
+            $buddyInterests = \App\Interest::whereHas('buddy', function(Builder $query){
+                $userId = Session::get('user')->id;
+                $query->where('buddy_id', $userId);
+            })->pluck('id')->toArray();
+
+
+            $data['matchingUser'] = DB::table('buddy_interest')
+                ->select(DB::raw('count(*) as common_interests, buddy_id'))
+                ->whereIn('interest_id', $buddyInterests)
+                ->groupBy('buddy_id')
+                ->havingRaw('COUNT(*) > 2')
+                ->whereNotIn('buddy_id', [$userId])
+                ->get();
+
             $data['users'] = \App\Buddy::whereNotIn('id', [$userId])->get();
-            $data['matchingUser'] = \App\Buddy::withCount('interests')->get();
+
             return view('buddies/index', $data);
         } else{
             return redirect('/login');
         }
-
     }
 
     public static function handleRegister(Request $request, int $userId){
