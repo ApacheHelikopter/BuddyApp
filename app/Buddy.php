@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use DB;
+use Session;
 
 class Buddy extends Model
 {
@@ -42,6 +45,30 @@ class Buddy extends Model
     public static function getProfilePicture($buddyId){
         $getName = Buddy::select('profile_picture')->where('id', $buddyId)->first();
         return $getName->profile_picture;
+    }
+
+    public static function getStatus($buddyId){
+        $getName = Buddy::select('buddy_status')->where('id', $buddyId)->first();
+        return $getName->buddy_status;
+    }
+
+    public static function getCommonInterests($buddyId, $currentUser){
+        $userId = Session::get('user')->id;
+
+        $buddyInterests = \App\Interest::whereHas('buddy', function(Builder $query){
+            $userId = Session::get('user')->id;
+            $query->where('buddy_id', $userId);
+        })->pluck('id')->toArray();
+
+        $common = DB::table('buddy_interest')
+                ->select(DB::raw('count(*) as common_interests'))
+                ->where('buddy_id', $buddyId)
+                ->whereIn('interest_id', $buddyInterests)
+                ->groupBy('buddy_id')
+                ->havingRaw('COUNT(*) > 2')
+                ->whereNotIn('buddy_id', [$userId])
+                ->get();
+        return $common;
     }
 
     public static function getId($buddyId){

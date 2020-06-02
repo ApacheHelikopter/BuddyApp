@@ -1,7 +1,11 @@
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
+<div class="max-w-sm rounded overflow-hidden shadow-lg h-auto mr-0 mb-8 sm:mr-20">
   <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1591037001540-65c4f4189ed0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80" alt="Sunset in the mountains">
   <div class="px-6 py-4">
-  <span class="inline-block bg-teal-200 text-teal-600 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">{{ $buddyClass }}</span>
+  @if($buddyStatus == 'Searching')
+    <span class="inline-block bg-teal-200 text-teal-600 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">{{ $buddyStatus }}</span>
+  @elseif($buddyStatus == 'Guiding')
+    <span class="inline-block bg-purple-200 text-purple-600 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">{{ $buddyStatus }}</span>
+  @endif
 
     <div class="font-bold text-xl mb-1">
         {{ $buddyName }}

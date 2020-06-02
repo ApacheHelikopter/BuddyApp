@@ -20,7 +20,7 @@
         <div class="rounded-lg h-96">
         <h1 class="text-3xl font-bold leading-tight text-gray-900">Best matching buddies</h1>
 
-        <div class="flex flex-row py-10">
+        <div class="flex flex-col items-center sm:flex-row py-10 ">
 
             @foreach( $matchingUser as $matching )
                 @component('components/matchingbuddy')
@@ -28,6 +28,7 @@
                         $buddy_name = \App\Buddy::getName($matching->buddy_id);
                         $buddy_class = \App\Buddy::getClass($matching->buddy_id);
                         $buddy_bio = \App\Buddy::getBio($matching->buddy_id);
+                        $buddy_status = \App\Buddy::getStatus($matching->buddy_id);
                     @endphp
 
                     @slot('buddyID')
@@ -35,6 +36,9 @@
                     @endslot
                     @slot('buddyName')
                         {{ $buddy_name }}
+                    @endslot
+                    @slot('buddyStatus')
+                        {{ $buddy_status }}
                     @endslot
                     @slot('buddyClass')
                         {{ $buddy_class }}
@@ -62,13 +66,13 @@
                             Name
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            Title
+                            Common interests
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            Status
+                            Buddy Status
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                            Role
+                            Class
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                         </tr>
@@ -82,6 +86,8 @@
                                         $buddy_class = \App\Buddy::getClass($buddy->id);
                                         $buddy_bio = \App\Buddy::getBio($buddy->id);
                                         $buddy_picture = \App\Buddy::getProfilePicture($buddy->id);
+                                        $buddy_status = \App\Buddy::getStatus($buddy->id);
+                                        $buddy_common = \App\Buddy::getCommonInterests($buddy->id, Session::get('user')->id);
                                     @endphp
 
                                     @slot('buddyID')
@@ -90,17 +96,17 @@
                                     @slot('buddyName')
                                         {{ $buddy_name }}
                                     @endslot
+                                    @slot('buddyStatus')
+                                        {{ $buddy_status }}
+                                    @endslot
                                     @slot('buddyClass')
                                         {{ $buddy_class }}
                                     @endslot
-                                    @slot('buddyBio')
-                                        {{ $buddy_bio }}
+                                    @slot('buddyCommon')
+                                        {{ $buddy_common[0]->common_interests }}
                                     @endslot
                                     @slot('buddyPicture')
                                         {{ $buddy_picture }}
-                                    @endslot
-                                    @slot('commonInterests')
-                                        {{ $matching->common_interests }}
                                     @endslot
                                 @endcomponent
                             @endforeach

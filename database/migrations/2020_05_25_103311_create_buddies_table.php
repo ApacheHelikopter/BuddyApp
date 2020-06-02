@@ -21,8 +21,10 @@ class CreateBuddiesTable extends Migration
             $table->string('class')->default('');
             $table->string('birth_date')->default('');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('profile_picture')->default('');
+            $table->string('profile_picture')->default('default');
+            $table->string('background_picture')->default('');
             $table->string('bio')->default('');
+            $table->string('buddy_status')->default('Searching');
             $table->rememberToken();
             $table->timestamps();
         });
