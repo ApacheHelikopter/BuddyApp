@@ -24,8 +24,24 @@ class Buddy extends Model
     }
 
     public static function getName($buddyId){
-        $getName = Buddy::select('firstname')->where('id', $buddyId)->first();
-        return $getName->firstname;
+        $getFirstName = Buddy::select('firstname')->where('id', $buddyId)->first();
+        $getLastName = Buddy::select('lastname')->where('id', $buddyId)->first();
+        return $fullName = $getFirstName->firstname . " " . $getLastName->lastname;
+    }
+
+    public static function getClass($buddyId){
+        $getName = Buddy::select('class')->where('id', $buddyId)->first();
+        return $getName->class;
+    }
+
+    public static function getBio($buddyId){
+        $getName = Buddy::select('bio')->where('id', $buddyId)->first();
+        return $getName->bio;
+    }
+
+    public static function getProfilePicture($buddyId){
+        $getName = Buddy::select('profile_picture')->where('id', $buddyId)->first();
+        return $getName->profile_picture;
     }
 
     public static function getId($buddyId){

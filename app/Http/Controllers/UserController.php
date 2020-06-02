@@ -71,7 +71,7 @@ class UserController extends Controller
             $user = auth()->user();
             $data['userdetails'] = \App\Buddy::where('user_id', $user->id)->first();
             Session::put('user', $data['userdetails']);
-            return redirect('/');
+            return redirect('/buddies');
         }
         return redirect('/login')->withErrors('Your email or password was incorrect!');
     }
