@@ -13,7 +13,6 @@
     <p class="text-gray-700 text-base mb-2">
       {{ $buddyBio }}
     </p>
-    <p class="pt-4">You have <span class="text-orange-800 font-semibold">{{ $buddyCommon }}</span> interests in common!</p>
   </div>
   <div class="text-center pb-6">
     <a href="/buddies/{{ $buddyID }}" class="flex-1"><span class="inline-block bg-teal-200 rounded-full px-3 py-1 text-sm font-semibold text-teal-500 mr-2">View profile</span></a>
