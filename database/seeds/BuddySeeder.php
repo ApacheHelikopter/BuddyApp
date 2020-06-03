@@ -11,6 +11,6 @@ class BuddySeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Buddy::class, 50)->create();
+        factory(\App\Buddy::class, 30)->create();
     }
 }

@@ -38,11 +38,11 @@
         @endif
 
       <div class="mt-6 flex items-center justify-between">
-        <div class="flex items-center">
-          <input id="remember_me" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-          <label for="remember_me" class="ml-2 block text-sm leading-5 text-gray-900">
-            Remember me
-          </label>
+
+        <div class="text-sm leading-5">
+          <a href="/register" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+            No account yet?
+          </a>
         </div>
 
         <div class="text-sm leading-5">

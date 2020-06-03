@@ -39,7 +39,7 @@
         <!-- Profile dropdown -->
         <div class="ml-3 relative">
           <div>
-            <a class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out cursor-pointer" id="user-menu" href="/buddies/{{ Session::get('user')->id }}" aria-label="User menu" aria-haspopup="true">
+            <a class="flex text-sm border-2 border-white rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out cursor-pointer" id="user-menu" href="/buddies/{{ Session::get('user')->id }}" aria-label="User menu" aria-haspopup="true">
               <img class="h-8 w-8 rounded-full" src="{{ asset('storage/profile_picture/'.Session::get('user')->id.'/'.Session::get('user')->profile_picture) }}" alt="" />
             </a>
           </div>

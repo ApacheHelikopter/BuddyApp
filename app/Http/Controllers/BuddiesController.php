@@ -78,7 +78,7 @@ class BuddiesController extends Controller
         $validation = Validator::make($request->all(), [
             'firstname' => 'string|required',
             'lastname' => 'string|required',
-            'bio' => 'string',
+            'bio' => 'string|max:500',
             'birth_date' => 'before:'.date('Y-m-d').'|date|required',
             'class' => 'string|required',
             'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',

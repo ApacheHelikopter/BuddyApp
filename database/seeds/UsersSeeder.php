@@ -19,6 +19,6 @@ class UsersSeeder extends Seeder
         // $student1->bio = 'Bestest Buddy';
         // $student1->profile_picture = "default.png";
         // $student1->save();
-        factory(\App\User::class, 50)->create();
+        factory(\App\User::class, 30)->create();
     }
 }

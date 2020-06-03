@@ -7,7 +7,7 @@ use App\Model;
 use Faker\Generator as Faker;
 
 $factory->define(\App\Buddy::class, function (Faker $faker) {
-    static $buddy_id = 7;
+    static $buddy_id = 5;
 
     return [
         'user_id' => $buddy_id++,

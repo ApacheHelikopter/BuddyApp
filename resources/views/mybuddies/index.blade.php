@@ -18,41 +18,45 @@
                 <div class="px-4 py-6 sm:px-0">
                     <h1 class="text-3xl font-bold leading-tight text-gray-900">My Buddies</h1>
                     <div class="flex flex-col items-center sm:flex-row py-10 ">
-                        @foreach( $friends as $friend )
-                            @php
-                                if(auth()->user()->id != $friend->buddy_id){
-                                    $buddy_name = \App\Buddy::getName($friend->buddy_id);
-                                    $buddyId = $friend->buddy_id;
-                                } else{
-                                    $buddy_name = \App\Buddy::getName($friend->friend_id);
-                                    $buddyId = $friend->friend_id;
-                                }
-                            @endphp
-
-                            @component('components/friendcard')
+                        @if(empty($friends))
+                            <h2>Search for a buddy and add them!</h2>
+                        @else
+                            @foreach( $friends as $friend )
                                 @php
-                                    $buddy_class = \App\Buddy::getClass($friend->buddy_id);
-                                    $buddy_bio = \App\Buddy::getBio($friend->buddy_id);
-                                    $buddy_status = \App\Buddy::getStatus($friend->buddy_id);
+                                    if(auth()->user()->id != $friend->buddy_id){
+                                        $buddy_name = \App\Buddy::getName($friend->buddy_id);
+                                        $buddyId = $friend->buddy_id;
+                                    } else{
+                                        $buddy_name = \App\Buddy::getName($friend->friend_id);
+                                        $buddyId = $friend->friend_id;
+                                    }
                                 @endphp
 
-                                @slot('buddyID')
-                                    {{ $buddyId }}
-                                @endslot
-                                @slot('buddyName')
-                                    {{ $buddy_name }}
-                                @endslot
-                                @slot('buddyStatus')
-                                    {{ $buddy_status }}
-                                @endslot
-                                @slot('buddyClass')
-                                    {{ $buddy_class }}
-                                @endslot
-                                @slot('buddyBio')
-                                    {{ $buddy_bio }}
-                                @endslot
-                            @endcomponent
-                        @endforeach
+                                @component('components/friendcard')
+                                    @php
+                                        $buddy_class = \App\Buddy::getClass($friend->buddy_id);
+                                        $buddy_bio = \App\Buddy::getBio($friend->buddy_id);
+                                        $buddy_status = \App\Buddy::getStatus($friend->buddy_id);
+                                    @endphp
+
+                                    @slot('buddyID')
+                                        {{ $buddyId }}
+                                    @endslot
+                                    @slot('buddyName')
+                                        {{ $buddy_name }}
+                                    @endslot
+                                    @slot('buddyStatus')
+                                        {{ $buddy_status }}
+                                    @endslot
+                                    @slot('buddyClass')
+                                        {{ $buddy_class }}
+                                    @endslot
+                                    @slot('buddyBio')
+                                        {{ $buddy_bio }}
+                                    @endslot
+                                @endcomponent
+                            @endforeach
+                        @endif
                     </div>
                 </div>
     @endif
