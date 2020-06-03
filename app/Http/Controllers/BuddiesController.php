@@ -94,6 +94,7 @@ class BuddiesController extends Controller
         $buddy->lastname = $request->input('lastname');
         $buddy->bio = $request->input('bio');
         $buddy->class = $request->input('class');
+        $buddy->buddy_status = $request->input('status');
         $buddy->birth_date = $request->input('birth_date');
         if($request->hasFile('profile_picture')) {
             $image = $request->file('profile_picture')->getClientOriginalName();

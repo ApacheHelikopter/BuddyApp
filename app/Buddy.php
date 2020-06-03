@@ -11,7 +11,7 @@ class Buddy extends Model
 {
     protected $table = 'buddies';
 
-    protected $fillable = ['user_id', 'firstname', 'lastname', 'email', 'password', 'profile_picture'];
+    protected $fillable = ['user_id', 'firstname', 'lastname', 'email', 'password', 'profile_picture', 'bio', 'buddy_status'];
 
     public function user()
     {

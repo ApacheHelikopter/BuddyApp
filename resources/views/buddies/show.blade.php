@@ -52,7 +52,11 @@
                 class="bg-gray-300 rounded-none h-48 w-full shadow-md bg-cover bg-center lg:rounded-b-lg">
             </div>
             <div class="h-auto -mt-40 overflow-hidden z-10">
-                <img class="rounded-full h-48 w-48" src="{{ asset('storage/profile_picture/'.$buddy->id.'/'.$buddy->profile_picture) }}" alt="" />
+                @if($buddy->profile_picture == 'mock.png')
+                    <img class="rounded-full h-48 w-48" src="{{ asset('storage/public/'.$buddy->profile_picture) }}" alt="" />
+                @else
+                    <img class="rounded-full h-48 w-48" src="{{ asset('storage/profile_picture/'.$buddy->id.'/'.$buddy->profile_picture) }}" alt="" />
+                @endif
             </div>
             <div class="w-11/12 h-auto bg-gray-200 mt-6 shadow-lg lg:rounded-lg lg:w-full">
                 <h1 class="flex justify-center items-center mx-auto text-3xl font-bold text-gray-800 mt-8">{{ $buddy->firstname }} {{ $buddy->lastname }}</h1>
@@ -100,7 +104,15 @@
                             @php
                                 $buddy_common = \App\Buddy::getCommonInterests($buddy->id, Session::get('user')->id);
                             @endphp
-                            <p class="font-semibold">You have <span class="text-orange-800 font-semibold">{{ $buddy_common[0]->common_interests }}</span> common interests with {{ $buddy->firstname }}!</p>
+                            <p class="font-semibold">You have
+                                <span class="text-orange-800 font-semibold">
+                                @if(empty($buddy_common[0]->common_interests))
+                                    0
+                                @else
+                                    {{ $buddy_common[0]->common_interests }}
+                                @endif
+                                </span> common interests with {{ $buddy->firstname }}!
+                            </p>
                         </div>
                     @endif
                 </div>

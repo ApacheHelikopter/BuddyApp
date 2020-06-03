@@ -19,16 +19,18 @@
             <div class="px-4 py-6 sm:px-0">
 
                 <h1 class="text-3xl font-bold leading-tight text-gray-900">My Interests</h1>
-                <div class="flex flex-col lg:flex-row">
+                <div class="flex flex-col lg:flex-row lg:flex-wrap">
                     @foreach( $buddy->interests as $buddyInterest)
                         <a href="/remove-interest/{{ $buddyInterest->id }}"><div class="bg-indigo-300 text-indigo-700 text-center p-2 my-2 lg:w-auto lg:mr-4">{{ $buddyInterest->interest }}</div></a>
                     @endforeach
                 </div>
 
                 <h2 class="text-3xl font-bold leading-tight text-gray-900 mt-12">Add interests</h2>
-                <div class="flex flex-col lg:flex-row">
+                <div class="flex flex-col lg:flex-row lg:flex-wrap">
                     @foreach( $allInterests as $interest)
-                        <a href="/add-interest/{{ $interest->id }}"><div class="bg-teal-300 text-teal-800 text-center p-2 my-2 lg:w-auto lg:mr-4">{{ $interest->interest }}</div></a>
+                        <div class="bg-teal-300 text-teal-800 text-center p-2 my-2 lg:w-auto lg:mr-4">
+                            <a href="/add-interest/{{ $interest->id }}">{{ $interest->interest }}</a>
+                        </div>
                     @endforeach
                 </div>
                 @if(count($buddy->interests) > 4)

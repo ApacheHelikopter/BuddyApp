@@ -18,6 +18,7 @@ $factory->define(\App\Buddy::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'profile_picture' => "default.png",
         'bio' => $faker->realText(50),
+        'buddy_status' => 'Searching',
         'remember_token' => Str::random(10),
     ];
 });

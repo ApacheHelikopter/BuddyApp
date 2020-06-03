@@ -32,18 +32,29 @@
         Class
       </label>
       <div class="relative">
-        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" name="class">
+        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-class" name="class">
           <option>1IMD</option>
           <option>2IMD</option>
           <option>3IMD</option>
         </select>
       </div>
     </div>
+    <div class="md:w-1/2 px-3 mb-6">
+      <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-status">
+        Buddy Status
+      </label>
+      <div class="relative">
+        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-status" name="status">
+          <option>Searching</option>
+          <option>Guiding</option>
+        </select>
+      </div>
+    </div>
     <div class="md:w-1/2 px-3">
-      <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
+      <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-date">
         Birth date
       </label>
-      <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="date" name="birth_date" value="{{ $date }}">
+      <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-date" type="date" name="birth_date" value="{{ $date }}">
     </div>
   </div>
   <div class="mt-6 px-3 lg:w-1/4 lg:mx-auto">

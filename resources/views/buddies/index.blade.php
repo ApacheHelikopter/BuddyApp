@@ -102,9 +102,17 @@
                                         @slot('buddyClass')
                                             {{ $buddy_class }}
                                         @endslot
-                                        @slot('buddyCommon')
-                                            {{ $buddy_common[0]->common_interests }}
-                                        @endslot
+
+                                        @if(empty($buddy_common[0]->common_interests))
+                                            @slot('buddyCommon')
+                                                {{ 0 }}
+                                            @endslot
+                                        @else
+                                            @slot('buddyCommon')
+                                                {{ $buddy_common[0]->common_interests }}
+                                            @endslot
+                                        @endif
+
                                         @slot('buddyPicture')
                                             {{ $buddy_picture }}
                                         @endslot

@@ -18,7 +18,7 @@
                 <div class="px-4 py-6 sm:px-0">
                     <h1 class="text-3xl font-bold leading-tight text-gray-900">My Buddies</h1>
                     <div class="flex flex-col items-center sm:flex-row py-10 ">
-                        @if(empty($friends))
+                        @if(count($friends) == 0)
                             <h2>Search for a buddy and add them!</h2>
                         @else
                             @foreach( $friends as $friend )

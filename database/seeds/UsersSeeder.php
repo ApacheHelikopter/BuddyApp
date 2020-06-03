@@ -11,14 +11,21 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        // $student1 = new \App\User();
-        // $student1->firstname = 'Ruben';
-        // $student1->lastname = 'Pieters';
-        // $student1->email = 'pietersruben@hotmail.com';
-        // $student1->password = Hash::make('password');
-        // $student1->bio = 'Bestest Buddy';
-        // $student1->profile_picture = "default.png";
-        // $student1->save();
-        factory(\App\User::class, 30)->create();
+        $student1 = new \App\User();
+        $student1->email = 'pietersruben@hotmail.com';
+        $student1->password = Hash::make('password');
+        $student1->save();
+
+        $student2 = new \App\User();
+        $student2->email = 'johndoe@hotmail.com';
+        $student2->password = Hash::make('password');
+        $student2->save();
+
+        $student3 = new \App\User();
+        $student3->email = 'stevejobs@hotmail.com';
+        $student3->password = Hash::make('password');
+        $student3->save();
+
+        // factory(\App\User::class, 30)->create();
     }
 }
