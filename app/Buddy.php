@@ -65,7 +65,6 @@ class Buddy extends Model
                 ->where('buddy_id', $buddyId)
                 ->whereIn('interest_id', $buddyInterests)
                 ->groupBy('buddy_id')
-                ->havingRaw('COUNT(*) > 2')
                 ->whereNotIn('buddy_id', [$userId])
                 ->get();
         return $common;

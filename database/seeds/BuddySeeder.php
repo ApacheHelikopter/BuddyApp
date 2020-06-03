@@ -13,8 +13,8 @@ class BuddySeeder extends Seeder
     {
         $buddy1 = new \App\Buddy();
         $buddy1->user_id = '1';
-        $buddy1->firstname = 'Ruben';
-        $buddy1->lastname = 'Pieters';
+        $buddy1->firstname = 'Forsen';
+        $buddy1->lastname = 'Baj';
         $buddy1->class = '3IMD';
         $buddy1->bio = 'Bestest Buddy';
         $buddy1->buddy_status = 'Searching';

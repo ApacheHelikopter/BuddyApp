@@ -48,7 +48,7 @@
     <div class="lg:px-32">
 
         <div class="flex flex-col justify-center items-center mx-auto max-w-6xl">
-            <div style="background-image: url(https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
+            <div style="background-image: url(https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
                 class="bg-gray-300 rounded-none h-48 w-full shadow-md bg-cover bg-center lg:rounded-b-lg">
             </div>
             <div class="h-auto -mt-40 overflow-hidden z-10">

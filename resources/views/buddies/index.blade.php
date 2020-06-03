@@ -22,35 +22,42 @@
 
             <div class="flex flex-col items-center sm:flex-row py-10 ">
 
-                @foreach( $matchingUser as $matching )
-                    @component('components/matchingbuddy')
-                        @php
-                            $buddy_name = \App\Buddy::getName($matching->buddy_id);
-                            $buddy_class = \App\Buddy::getClass($matching->buddy_id);
-                            $buddy_bio = \App\Buddy::getBio($matching->buddy_id);
-                            $buddy_status = \App\Buddy::getStatus($matching->buddy_id);
-                        @endphp
+                @if(count($matchingUser) == 0)
+                    <div class="flex flex-col">
+                        <p>You don't have any matching buddies yet 😥</p>
+                        <p>Add or edit your interests <a href="/buddies/{{ Session::get('user')->id }}/interests" class="font-bold">here</a></p>
+                    </div>
+                @else
+                    @foreach( $matchingUser as $matching )
+                        @component('components/matchingbuddy')
+                            @php
+                                $buddy_name = \App\Buddy::getName($matching->buddy_id);
+                                $buddy_class = \App\Buddy::getClass($matching->buddy_id);
+                                $buddy_bio = \App\Buddy::getBio($matching->buddy_id);
+                                $buddy_status = \App\Buddy::getStatus($matching->buddy_id);
+                            @endphp
 
-                        @slot('buddyID')
-                            {{ $matching->buddy_id }}
-                        @endslot
-                        @slot('buddyName')
-                            {{ $buddy_name }}
-                        @endslot
-                        @slot('buddyStatus')
-                            {{ $buddy_status }}
-                        @endslot
-                        @slot('buddyClass')
-                            {{ $buddy_class }}
-                        @endslot
-                        @slot('buddyBio')
-                            {{ $buddy_bio }}
-                        @endslot
-                        @slot('buddyCommon')
-                            {{ $matching->common_interests }}
-                        @endslot
-                    @endcomponent
-                @endforeach
+                            @slot('buddyID')
+                                {{ $matching->buddy_id }}
+                            @endslot
+                            @slot('buddyName')
+                                {{ $buddy_name }}
+                            @endslot
+                            @slot('buddyStatus')
+                                {{ $buddy_status }}
+                            @endslot
+                            @slot('buddyClass')
+                                {{ $buddy_class }}
+                            @endslot
+                            @slot('buddyBio')
+                                {{ $buddy_bio }}
+                            @endslot
+                            @slot('buddyCommon')
+                                {{ $matching->common_interests }}
+                            @endslot
+                        @endcomponent
+                    @endforeach
+                @endif
 
             </div>
 
